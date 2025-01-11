@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 20000
+      idle-timeout: 300000
+      max-lifetime: 600000
+      data-source-properties:
+        cachePrepStmts: false
+        prepStmtCacheSize: 0
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 10
+    show-sql: true
+    hibernate:
+      ddl-auto: update
