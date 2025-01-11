@@ -19,6 +19,7 @@ class UserController(
     fun signUp(
         @RequestBody signUpRequest: SignUpRequest
     ): ResponseEntity<Void> {
+        userService.signUp(signUpRequest)
         return ResponseEntity.ok().build()
     }
 
