@@ -3,21 +3,20 @@ package org.gdg_back.service
 import jakarta.persistence.EntityNotFoundException
 import org.gdg_back.dto.PersonResponse
 import org.gdg_back.repository.BasicInfoRepository
-import org.gdg_back.repository.ChatRoomRepository
-import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
-import org.springframework.web.reactive.function.client.WebClient
-import reactor.core.publisher.Mono
 
 
 @Service
 class PersonService (
-    private val basicInfoRepository: BasicInfoRepository
+    private val basicInfoRepository: BasicInfoRepository,
+    private val chatRoomService: ChatRoomService
 ){
 
     fun getPersonInfo(name: String): PersonResponse {
-        val person = basicInfoRepository.findByName(name)
-            ?: throw EntityNotFoundException("Person not found with name: $name")
+        if(!basicInfoRepository.existsByName(name))
+            chatRoomService.callPersonaGenerator(name)
+
+        val person = basicInfoRepository.findByName(name) ?: throw EntityNotFoundException("Person not found")
 
         return PersonResponse.from(person)
     }
