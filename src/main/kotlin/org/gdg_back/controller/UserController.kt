@@ -3,7 +3,6 @@ package org.gdg_back.controller
 import org.gdg_back.dto.SignInRequest
 import org.gdg_back.dto.SignInResponse
 import org.gdg_back.dto.SignUpRequest
-import org.gdg_back.model.User
 import org.gdg_back.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
