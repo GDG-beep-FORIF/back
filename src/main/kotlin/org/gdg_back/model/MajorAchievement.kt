@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "major_achievements")
 class MajorAchievement(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "achievement_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

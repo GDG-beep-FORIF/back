@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "other_roles")
 class OtherRole(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "role_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

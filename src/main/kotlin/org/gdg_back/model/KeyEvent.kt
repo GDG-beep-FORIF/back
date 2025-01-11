@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "key_events")
 class KeyEvent(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "event_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "historical_context")
 class HistoricalContext(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "context_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

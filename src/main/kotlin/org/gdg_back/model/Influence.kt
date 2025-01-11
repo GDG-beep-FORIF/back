@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "influences")
 class Influence(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "influence_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

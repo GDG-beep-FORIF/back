@@ -8,7 +8,6 @@ import java.util.*
 @Table(name = "basic_info")
 class BasicInfo(
     @Id
-    @GeneratedValue(generator = "UUID")
     @Column(name = "person_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

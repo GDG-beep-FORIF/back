@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "personal_info")
 class PersonalInfo(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "personal_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

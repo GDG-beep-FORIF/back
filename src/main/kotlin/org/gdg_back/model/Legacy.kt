@@ -6,7 +6,7 @@ import java.util.*
 @Entity
 @Table(name = "legacy")
 class Legacy(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "legacy_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 

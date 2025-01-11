@@ -8,26 +8,27 @@ import java.util.*
 @Entity
 @Table(name = "users")
 class User(
-    @Id @GeneratedValue(generator = "UUID")
-    @Column(name = "user_id", updatable = false, nullable = false)
-    val id: UUID = UUID.randomUUID(),
+    @Id
+    @Column(name = "user_id", nullable = false, updatable = false)
+    val id: UUID = UUID.randomUUID(), // 직접 생성
 
     @Column(unique = true, nullable = false)
-    val email: String,
+    var email: String,
 
     @Column(name = "password_hash", nullable = false)
-    val passwordHash: String,
+    var passwordHash: String,
 
     @Column(nullable = false)
-    val username: String,
+    var username: String,
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
 
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val chatRooms: MutableSet<ChatRoom> = mutableSetOf(),
 
-    @OneToMany(mappedBy = "user", cascade = [CascadeType.ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     val messages: MutableSet<ChatMessage> = mutableSetOf()
-){}
+) {
+}

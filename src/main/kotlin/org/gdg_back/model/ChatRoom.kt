@@ -8,11 +8,16 @@ import java.util.*
 @Entity
 @Table(name = "chat_rooms")
 class ChatRoom(
-    @Id @GeneratedValue(generator = "UUID")
+    @Id
     @Column(name = "room_id", updatable = false, nullable = false)
     val id: UUID = UUID.randomUUID(),
 
     val title: String,
+
+    var status: String = "ACTIVE",
+
+    @Column(columnDefinition = "TEXT")
+    var summary: String? = null,
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -21,6 +26,9 @@ class ChatRoom(
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "completed_at")
+    var completedAt: LocalDateTime? = null,
 
     @OneToMany(mappedBy = "chatRoom", cascade = [CascadeType.ALL], orphanRemoval = true)
     val messages: MutableSet<ChatMessage> = mutableSetOf(),
@@ -32,4 +40,4 @@ class ChatRoom(
         inverseJoinColumns = [JoinColumn(name = "person_id")]
     )
     val persons: MutableSet<BasicInfo> = mutableSetOf()
-){}
+)
