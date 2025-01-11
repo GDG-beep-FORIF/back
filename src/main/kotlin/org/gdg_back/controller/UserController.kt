@@ -1,6 +1,7 @@
 package org.gdg_back.controller
 
 import org.gdg_back.dto.SignInRequest
+import org.gdg_back.dto.SignInResponse
 import org.gdg_back.dto.SignUpRequest
 import org.gdg_back.model.User
 import org.gdg_back.service.UserService
@@ -18,14 +19,14 @@ class UserController(
     @PostMapping("/sign-up")
     fun signUp(
         @RequestBody signUpRequest: SignUpRequest
-    ): ResponseEntity<User> {
-        return ResponseEntity.ok(userService.signUp(signUpRequest))
+    ): ResponseEntity<Void> {
+        return ResponseEntity.ok().build()
     }
 
     @PostMapping("/sign-in")
     fun signIn(
         @RequestBody signInRequest: SignInRequest
-    ):ResponseEntity<User> {
+    ):ResponseEntity<SignInResponse> {
         return ResponseEntity.ok(userService.signIn(signInRequest))
     }
 }
