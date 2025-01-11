@@ -18,4 +18,6 @@ interface BasicInfoRepository : JpaRepository<BasicInfo, UUID>{
         "keyEvents"
     ])
     fun findByName(name: String): BasicInfo?
+
+    fun existsByName(name: String): Boolean
 }

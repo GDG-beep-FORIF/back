@@ -10,7 +10,7 @@ import java.util.*
 class User(
     @Id
     @Column(name = "user_id", nullable = false, updatable = false)
-    val id: UUID = UUID.randomUUID(), // 직접 생성
+    val id: UUID = UUID.randomUUID(),
 
     @Column(unique = true, nullable = false)
     var email: String,
