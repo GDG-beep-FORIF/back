@@ -61,7 +61,7 @@ class ChatRoomService(
     }
 
     fun callPersonaGenerator(name: String) {
-        val url = "http://147.47.236.54:8000/persona_generator"
+        val url = "http://147.47.236.54:8001/persona_generator"
 
         val headers = HttpHeaders().apply {
             contentType = MediaType.APPLICATION_JSON
