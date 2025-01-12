@@ -1,5 +1,7 @@
 package org.gdg_back.service
 
+import org.gdg_back.dto.ChatMessageResponse
+import org.gdg_back.dto.ChatRoomResponse
 import org.gdg_back.dto.CreateChatRoomRequest
 import org.gdg_back.dto.CreateChatRoomResponse
 import org.gdg_back.model.BasicInfo
@@ -14,6 +16,7 @@ import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.client.RestTemplate
+import java.util.*
 
 @Service
 class ChatRoomService(
@@ -55,6 +58,32 @@ class ChatRoomService(
             roomId = savedChatRoom.id,
             status = savedChatRoom.status,
             personCount = savedChatRoom.persons.size
+        )
+
+        return response
+    }
+
+    fun getChatRoom(roomId: UUID): ChatRoomResponse {
+        val chatRoom = chatRoomRepository.findById(roomId)
+            .orElseThrow { IllegalArgumentException("Chat room with ID $roomId not found") }
+
+        val summary = chatRoom.messages
+            .map { it.content }
+            .firstOrNull { it.startsWith("#") }
+            ?.removePrefix("#")
+            ?.trim()
+
+
+        val response = ChatRoomResponse(
+            summary = summary,
+            chatMessage = chatRoom.messages.map {
+                ChatMessageResponse(
+                    messageId = it.id,
+                    message = it.content,
+                    senderType = it.senderType,
+                    senderId = it.user?.id,
+                )
+            }
         )
 
         return response
